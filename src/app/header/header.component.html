@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" [routerLink]="['/recipes']">Recipe Book</a>
+  <button class="navbar-toggler" type="button" (click)="collapsed = !collapsed">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" [ngClass]="{show: collapsed}" (window:resize)="collapsed = false">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active" *ngIf="isAuthenticated">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/recipes']">Recipes</a>
+      </li>
+      <li class="nav-item active" *ngIf="!isAuthenticated">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/auth']">Authentication</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLinkActive="active" [routerLink]="['/shopping-list']">Shopping List</a>
+      </li>
+      <li class="nav-item" *ngIf="isAuthenticated">
+        <a class="nav-link" (click)="onLogout()">Logout</a>
+      </li>
+      <li class="nav-item dropdown" *ngIf="isAuthenticated" vueDropdown>
+        <a class="nav-link dropdown-toggle">
+          Manage
+        </a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" (click)="onSaveData()">Save Data</a>
+          <a class="dropdown-item" (click)="onFetchData()">Fetch Data</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item">Something else here</a>
+        </div>
+      </li>
+    </ul>
+
+  </div>
+</nav>
